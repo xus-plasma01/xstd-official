@@ -1,0 +1,8 @@
+-- printing chars and fmts --
+x
+Hello World!
+
+-- memory testing (arena alloc) --
+allocated b1: 2ccdb7a8
+allocated b2: 2ccdb7b0
+freed b1 and b2

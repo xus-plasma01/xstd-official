@@ -27,6 +27,9 @@ asmnolinker:
 run:
 	./$(TARGET)
 
+transfertotxt:
+	./$(TARGET) > outputs.txt
+
 clean:
 	rm -rf $(TARGET)
 
