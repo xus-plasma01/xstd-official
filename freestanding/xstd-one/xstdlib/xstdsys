@@ -15,9 +15,12 @@
 #ifdef __cplusplus
 #	define _asm 			asm
 #	define _unoptimizable 	volatile
-#else
+#elif defined(__GNUC__) || defined(__clang__)
 #	define _asm 			__asm__
 #	define _unoptimizable 	__volatile__
+#else
+#	error "unsupported compiler"
+#	error "gnu style asm requires a gcc or clang compiler"
 #endif
 
 #define unoptimizable _unoptimizable
@@ -77,35 +80,6 @@ inline intptr_t vsyscall(
 #endif
 
 	return res;
-}
-
-inline void putchar(char c)
-{
-	xus::vsyscall(
-		7,
-		PUTCHAR,
-		static_cast<intptr_t>(1),
-		reinterpret_cast<intptr_t>(&c),
-		static_cast<intptr_t>(1),
-		static_cast<intptr_t>(0),
-		static_cast<intptr_t>(0),
-		static_cast<intptr_t>(0)
-	);
-}
-
-inline void outchar(char c)
-{
-	putchar(c);
-}
-
-inline void outc(char c)
-{
-	outchar(c);
-}
-
-inline int getchar(void)
-{
-	return xus::vsyscall(GETCHAR, 0, 0, 0);
 }
 
 extern "C" _noreturn 

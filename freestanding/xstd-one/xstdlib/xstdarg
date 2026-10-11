@@ -1,3 +1,5 @@
+/// just think of this as "xstdarg.h"
+
 #ifndef _xstdarg
 #define _xstdarg
 

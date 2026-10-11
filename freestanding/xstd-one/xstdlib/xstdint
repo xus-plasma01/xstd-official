@@ -1,6 +1,9 @@
 #ifndef _xstdint
 #define _xstdint
 
+namespace xus 
+{
+
 #if defined(__GNUC__)
 
 typedef __SIZE_TYPE__			size_t;
@@ -65,5 +68,7 @@ typedef uint64_t 	uintptr_t;
 typedef uint32_t size_t;
 
 #endif
+
+}
 
 #endif
