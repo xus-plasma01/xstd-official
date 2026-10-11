@@ -1,7 +1,7 @@
 #ifndef _xstdmem
 #define _xstdmem
 
-#include "xstdint"
+#include "xstdint.h"
 
 #define _ARENA_SIZE 1024		/// total mem pool size
 
@@ -10,9 +10,12 @@ namespace xus::mem
 
 typedef struct _segment
 {
-	_segment_t *next;
+	_segment *next;
 }
 segment;
+
+typedef _segment	_segment_t;
+typedef segment		segment_t;
 
 typedef class _arena
 {
@@ -64,6 +67,9 @@ public:
 	}
 }
 arena;
+
+typedef _arena 		_arena_t;
+typedef arena		 arena_t;
 
 }
 

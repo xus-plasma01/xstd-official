@@ -1,18 +1,20 @@
-#include "xstdlib/xstdio"
-#include "xstdlib/xstdsys"
-#include "xstdlib/xstdmem"
+#include "xstdlib-wfe/xstdio.h"
+#include "xstdlib-wfe/xstdsys.h"
+#include "xstdlib-wfe/xstdmem.h"
 
 extern "C" [[noreturn]] 
 void _start()
 {
 	/// printing chars and fmts
+	xus::outf("-- printing chars and fmts --\n");
 	xus::outc('x');
 	xus::outc('\n');
-	xus::outf("Hello World!");
+	xus::outf("Hello World!\n\n");
 
 
 	/// memory testing
-	xus::mem::arena arena;
+	xus::outf("-- memory testing (arena alloc) --\n");
+	xus::mem::arena_t arena;
 
 	arena.init();
 

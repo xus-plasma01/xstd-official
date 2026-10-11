@@ -1,8 +1,8 @@
 #ifndef _xstdio
 #define _xstdio
 
-#include "xstdarg"
-#include "xstdsys"
+#include "xstdarg.h"
+#include "xstdsys.h"
 
 namespace xus
 {

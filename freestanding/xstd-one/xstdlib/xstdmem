@@ -10,9 +10,11 @@ namespace xus::mem
 
 typedef struct _segment
 {
-	_segment_t *next;
+	_segment *next;
 }
 segment;
+typedef _segment 	_segment_t;
+typedef segment 	segment_t;
 
 typedef class _arena
 {
@@ -64,6 +66,7 @@ public:
 	}
 }
 arena;
+typedef arena arena_t;
 
 }
 

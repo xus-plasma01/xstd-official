@@ -2,9 +2,9 @@
 #define _xstdsys
 
 /// headers
-#include "xstdio"
-#include "xstdarg"
-#include "xstdint"
+#include "xstdio.h"
+#include "xstdarg.h"
+#include "xstdint.h"
 
 /// some redundancy
 #ifdef __cplusplus
