@@ -38,8 +38,8 @@ inline int getchar(void)
 }
 
 
-/// xus::__outf(fmt, ...)
-inline void __outf(const char *fmt, ...)
+/// xus::outf(fmt, ...)
+inline void outf(const char *fmt, ...)
 {
 	va_list xargs;
 	va_start(xargs, fmt);
@@ -113,13 +113,6 @@ inline void __outf(const char *fmt, ...)
 		fmt++;
 	}
 	end:	va_end(xargs);
-}
-
-/// xus::outf(fmt, ...);
-inline void outf(const char *fmt, ...)
-{
-	va_list xargs;
-	__outf(fmt, xargs);
 }
 
 }
