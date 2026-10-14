@@ -1,0 +1,6 @@
+#ifndef _xstdmem
+#define _xstdmem
+
+#include "include/xstdmem.hh"
+
+#endif

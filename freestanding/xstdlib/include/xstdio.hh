@@ -10,8 +10,11 @@ void 	outc(char c);
 /// xus::getc(void);
 int 	getc(void);
 
-/// xus::outf(const char *, ...)
-void 	outf(const char *fmt, ...);
+/// xus::outf(cosnt char *, ...);
+void	outf(const char *fmt, ...);
+
+/// xus::outw(const char *, ...);
+void	outw(const char *str, ...);
 
 }
 

@@ -35,7 +35,8 @@ void xus::outf(const char *fmt, ...)
 	{
 		if (*fmt == '%')
 		{
-			switch(*fmt++)
+			++fmt;
+			switch(*fmt)
 			{
 			case '\0':
 				xus::outc('%');
@@ -82,16 +83,36 @@ void xus::outf(const char *fmt, ...)
 			case 'x':
 				{
 					unsigned val = va_arg(xargs, unsigned);
+
+					unsigned prefix = val;
+					if (prefix)
+						{
+							xus::outc('0');
+							xus::outc('x');
+						}
+					
 					for (int i = 7; i >= 0; i--)
-					{
-						unsigned nib = (val >> (i*4)) & 0xf;
-						xus::outc("0123456789abcdef"[nib]);
-					}
+						{
+							unsigned nib = (val >> (i*4)) & 0xf;
+							xus::outc("0123456789abcdef"[nib]);
+						}
+
+					break;
 				}
 			}
+			++fmt;
 		}
 		else
 			xus::outc(*fmt++);
 	}
 	end:	va_end(xargs);
 }
+
+void xus::outw(const char *str, ...)
+{
+	va_list vargs;
+	va_start(vargs, str);
+	xus::outf(str, vargs);
+	va_end(vargs);
+}
+
