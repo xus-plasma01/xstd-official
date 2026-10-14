@@ -40,7 +40,7 @@ asmlinkage long xus::vsyscall(
 	}
 }
 
-asmlinkage _noreturn void
+asmlinkage void
 xus::ret(long number, long code)
 {
 	xus::vsyscall(2, number, code);

@@ -1,16 +1,32 @@
 CXX			:= ../zig-0.16/zig c++
-<<<<<<< HEAD
+AR			:= ../zig-0.16/zig ar
+
 CXXFLAGS 	:= -target x86_64-linux-none -ffreestanding -nostdlib -static -fno-exceptions -fno-rtti -fno-sanitize=undefined -fno-stack-protector -T linker.ld
-=======
-CXXFLAGS 	:= -target x86_64-linux-none -ffreestanding -nostdlib -fno-exceptions -fno-rtti -fno-sanitize=undefined -fno-stack-protector -T linker.ld
->>>>>>> 38a9dd99 ([commit 8] i put zig's drop-in c/c++ compilers in the repo or directory so you don't need to manually install compilers.)
 
-ARCHSRC			:= xstdlib/external/arch/x86-64/syscalls.cc
-SRC				:= xstdlib/external/*.cc xstdlib/src/*.cc main.cc
-TARGET			:= xstd-freestanding
+X86_64_ARCHSRC		:= $(wildcard xstdlib/external/arch/x86-64/*.cc)
+ARCHSRC				:= $(X86_64_ARCHSRC)
+EXTERNAL_SRC		:= $(wildcard xstdlib/external/*.cc)
+OTHER_SRC			:= $(wildcard xstdlib/src/*.cc)
+SRC					:= $(EXTERNAL_SRC) $(OTHER_SRC) $(ARCHSRC)
+OBJ					:= $(SRC:%.cc=build/%.o)
 
-$(TARGET): $(ARCHSRC) $(SRC)
-	$(CXX) $(CXXFLAGS) $(ARCHSRC) $(SRC) -o $(TARGET)
+TARGET				:= outfile
+OBJTARGET			:= outfile.o
+
+$(TARGET): main.cc $(SRC)
+	$(CXX) $(CXXFLAGS) $(SRC) main.cc -o $(TARGET)
+
+static: build/xuslib.a
+
+static_compile: build/xuslib.a main.cc
+	$(CXX) $(CXXFLAGS) build/xuslib.a main.cc -o outfile
+
+build/xuslib.a: $(OBJ)
+	$(AR) rcs $@ $^
+
+build/%.o: %.cc
+	@mkdir -p $(dir $@)
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 static:
 	$(CXX) $(CXXFLAGS) -static $(ARCHSRC) $(SRC) -o $(TARGET)
@@ -20,3 +36,4 @@ run:
 
 clean:
 	rm -rf $(TARGET)
+	rm -rf build

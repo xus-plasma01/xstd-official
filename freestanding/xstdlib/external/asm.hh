@@ -2,16 +2,37 @@
 #define _asm_h
 
 #ifdef __cplusplus
-#	define _asm				asm
-#	define _unoptimize		volatile
-#	define _asmlinkage		extern "C"
+#	ifndef _asm
+#		define _asm				asm
+#	endif
+#
+#	ifndef _unoptimize
+#		define _unoptimize		volatile
+#	endif
+
+#	ifndef _asmlinkage
+#		define _asmlinkage		extern "C"
+#	endif
 #elif defined(__STDC__)
-#	define _asm				__asm__
-#	define _unoptimize		__volatile__
-#	define _asmlinkage
+#	ifndef _asm
+#		define _asm				__asm__
+#	endif
+#
+#	ifndef _asm
+#		define _unoptimize		__volatile__
+#	endif
+#	
+#	ifndef _asmlinkage
+#		define _asmlinkage
+#	endif
 #endif
 
-#define unoptimize 	_unoptimize
-#define asmlinkage	_asmlinkage
+#ifndef unoptimize
+#	define unoptimize 	_unoptimize
+#endif
+
+#ifndef asmlinkage
+#	define asmlinkage	_asmlinkage
+#endif
 
 #endif

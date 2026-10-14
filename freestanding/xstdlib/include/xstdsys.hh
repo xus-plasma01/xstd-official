@@ -20,7 +20,7 @@ void unreachable()
 }
 
 asmlinkage long vsyscall(int _args, long number, ...);
-asmlinkage _noreturn void ret(long number, long code);
+asmlinkage void ret(long number, long code);
 
 }
 
