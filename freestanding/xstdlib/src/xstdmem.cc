@@ -3,13 +3,15 @@
 #include "../include/xstdint.hh"
 #include "../include/xstdio.hh"
 
+
 void xus::_arena_t::init()
 {
 	list				= reinterpret_cast<_segment_t *>(arena);
-	_segment_t *crnt	= list;
+	_segment_t *crnt{ list };
 
-	for (int i = 0; 
-			i < (arena_size / sizeof(_segment_t)) - 1; i++)
+	xus::usize_t store{ arena_size / sizeof(_segment_t) };
+
+	for (int i = 0; i < store - 1; i++)
 	{
 		crnt->next = reinterpret_cast<_segment_t *>(
 			reinterpret_cast<unsigned char *>(crnt) + sizeof(_segment_t));
@@ -20,13 +22,32 @@ void xus::_arena_t::init()
 	crnt->next = nullptr;
 }
 
+xus::usize_t xus::afm(
+	usize_t size)
+{
+	size = arena_size + size;
+	if (size > max_allowed_size)
+		{
+			xus::outw("[arena error] too much memory is being requested\n");
+			return 0;
+		}
+
+	return size;
+}
+
+xus::usize_t xus::afmm(
+	usize_t size)
+{
+	return xus::afm(size);
+}
+
 void *xus::_arena_t::assign()
 {
 	if (list == nullptr)
-	{
-		xus::outw("memory arena exhausted\n");
-		return nullptr;
-	}
+		{
+			xus::outw("[arena error] memory arena exhausted\n");
+			return nullptr;
+		}
 
 	_segment *seg	= list;
 	list			= seg->next;

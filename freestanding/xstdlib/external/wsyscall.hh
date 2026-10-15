@@ -1,7 +1,7 @@
 #ifndef _syscall_wrapper_hh
 #define _syscall_wrapper_hh
 
-#define asmlinkage extern "C"
+#include "asm.hh"
 
 namespace xus
 {

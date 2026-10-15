@@ -36,4 +36,6 @@ run:
 
 clean:
 	rm -rf $(TARGET)
+	rm -rf $(TARGET).o
+	rm -rf $(TARGET).S
 	rm -rf build

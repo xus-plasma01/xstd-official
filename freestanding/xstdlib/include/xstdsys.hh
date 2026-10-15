@@ -1,8 +1,11 @@
 #ifndef _xstdsys_hh
 #define _xstdsys_hh
 
+/// externals
+#include "../external/asm.hh"
+
+/// defines
 #define _noreturn __attribute__((noreturn))
-#define asmlinkage extern "C"
 
 namespace xus
 {
