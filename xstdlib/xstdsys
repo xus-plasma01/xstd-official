@@ -1,0 +1,6 @@
+#ifndef _xstdsys
+#define _xstdsys
+
+#include "include/xstdsys.hh"
+
+#endif
