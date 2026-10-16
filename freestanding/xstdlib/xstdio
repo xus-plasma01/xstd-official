@@ -1,6 +1,0 @@
-#ifndef _xstdio
-#define _xstdio
-
-#include "include/xstdio.hh"
-
-#endif
