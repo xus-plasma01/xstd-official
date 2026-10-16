@@ -108,6 +108,7 @@ typedef uintptr_t				uintptr;
 
 #else
 
+/// UC = Unsupported Compiler
 #warning "[warning UC] not using GCC or CLANG, revering to non-extension types"
 
 typedef unsigned char		uint8_t;
