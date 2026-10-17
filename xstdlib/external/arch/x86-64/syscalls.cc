@@ -5,7 +5,10 @@
 namespace xus
 {
 
-asmlinkage long x86_64_syscall0(long number)
+asmlinkage 
+{
+
+long x86_64_syscall0(long number)
 {
 	long ret;
 	_asm unoptimize(
@@ -21,7 +24,7 @@ asmlinkage long x86_64_syscall0(long number)
 		
 }
 
-asmlinkage long x86_64_syscall1(long number, long res1)
+long x86_64_syscall1(long number, long res1)
 {
 	long ret;
 	_asm unoptimize(
@@ -37,7 +40,7 @@ asmlinkage long x86_64_syscall1(long number, long res1)
 	return ret;
 }
 
-asmlinkage long x86_64_syscall2(
+long x86_64_syscall2(
 	long number, long res1, long res2)
 {
 	long ret;
@@ -55,7 +58,7 @@ asmlinkage long x86_64_syscall2(
 	return ret;
 }
 
-asmlinkage long x86_64_syscall3(
+long x86_64_syscall3(
 	long number, 
 	long res1, 
 	long res2, 
@@ -77,7 +80,7 @@ asmlinkage long x86_64_syscall3(
 	return ret;
 }
 
-asmlinkage long x86_64_syscall4(
+long x86_64_syscall4(
 	long number,
 	long res1,
 	long res2,
@@ -104,7 +107,7 @@ asmlinkage long x86_64_syscall4(
 	return ret;
 }
 
-asmlinkage long x86_64_syscall5(
+long x86_64_syscall5(
 	long number,
 	long res1,
 	long res2,
@@ -134,8 +137,7 @@ asmlinkage long x86_64_syscall5(
 	return ret;
 }
 
-asmlinkage long 
-x86_64_syscall6(
+long x86_64_syscall6(
 	long number,
 	long res1,
 	long res2,
@@ -168,7 +170,7 @@ x86_64_syscall6(
 	return ret;
 }
 
-asmlinkage long x86_64_vsyscall(
+long x86_64_vsyscall(
 	int args, long number, ...)
 {
 	va_list vargs;
@@ -200,6 +202,8 @@ asmlinkage long x86_64_vsyscall(
 	case 6:		return x86_64_syscall6(number, arg1, arg2, arg3, arg4, arg5, arg6);
 	default:	return x86_64_syscall6(number, arg1, arg2, arg3, arg4, arg5, arg6);
 	}
+}
+
 }
 
 }

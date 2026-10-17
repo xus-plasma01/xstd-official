@@ -6,6 +6,9 @@
 #include "../external/sysnums.hh"
 #include "../external/args.hh"
 
+static xus::xstream streamrock;
+xus::xstream& xus::xout = streamrock;
+
 void xus::outc(char c)
 {
 	xus::vsyscall(
@@ -26,7 +29,7 @@ int xus::getc(void)
 		0);
 }
 
-void xus::outf(const char *fmt, ...)
+void xus::outw(const char *fmt, ...)
 {
 	va_list xargs;
 	va_start(xargs, fmt);
@@ -80,31 +83,24 @@ void xus::outf(const char *fmt, ...)
 
 					break;
 				}
-			case 'u':
-				{
-					switch(fmt[1])
+				case 'x':
 					{
-					case 'x':
-						{
-							unsigned val = va_arg(xargs, unsigned);
+						unsigned val = va_arg(xargs, unsigned);
 
-							unsigned prefix = val;
-							if (prefix)
-								{
-									xus::outc('0');
-									xus::outc('x');
-								}
+						unsigned prefix = val;
+						if (prefix)
+							{
+								xus::outc('0');
+								xus::outc('x');
+							}
 					
-							for (int i = 7; i >= 0; i--)
-								{
-									unsigned nib = (val >> (i*4)) & 0xf;
-									xus::outc("0123456789abcdef"[nib]);
-								}
-						}
+						for (int i = 7; i >= 0; i--)
+							{
+								unsigned nib = (val >> (i*4)) & 0xf;
+								xus::outc("0123456789abcdef"[nib]);
+							}
+						break;
 					}
-
-					break;
-				}
 			}
 			++fmt;
 		}
@@ -112,13 +108,5 @@ void xus::outf(const char *fmt, ...)
 			xus::outc(*fmt++);
 	}
 	end:	va_end(xargs);
-}
-
-void xus::outw(const char *str, ...)
-{
-	va_list vargs;
-	va_start(vargs, str);
-	xus::outf(str, vargs);
-	va_end(vargs);
 }
 

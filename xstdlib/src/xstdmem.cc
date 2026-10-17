@@ -22,7 +22,7 @@ void xus::_arena_t::init()
 	crnt->next = nullptr;
 }
 
-xus::usize_t xus::afm(
+Usize_t xus::afm(
 	usize_t size)
 {
 	size = arena_size + size;
@@ -35,7 +35,7 @@ xus::usize_t xus::afm(
 	return size;
 }
 
-xus::usize_t xus::afmm(
+Usize_t xus::afmm(
 	usize_t size)
 {
 	return xus::afm(size);

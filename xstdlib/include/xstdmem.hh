@@ -3,10 +3,10 @@
 
 #include "xstdint.hh"
 
-inline constexpr xus::Usize_t arena_size{ 1024 };
+inline constexpr Usize_t arena_size{ 1024 };
 
 #ifdef __x86_64__
-	inline constexpr xus::Usize_t max_allowed_size{ 64ULL * 1024 * 1024 };
+	inline constexpr Usize_t max_allowed_size{ 64UL * 1024UL * 1024UL };
 #endif
 
 namespace xus
@@ -40,8 +40,8 @@ typedef _arena_t 	_arena;
 typedef	 arena_t 	 arena;
 
 
-xus::Usize_t afm(xus::Usize_t size);
-xus::Usize_t afmm(xus::Usize_t size);
+Usize_t afm(xus::Usize_t size);
+Usize_t afmm(xus::Usize_t size);
 	
 }
 

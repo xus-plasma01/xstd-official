@@ -151,6 +151,42 @@ typedef ssize_t				ssize;
 
 typedef usize_t Usize_t;
 typedef ssize_t Ssize_t;
+typedef Ssize_t	Isize_t;
+
+typedef Usize_t	Usize;
+typedef Ssize_t Ssize;
+typedef Isize_t Isize;
+
+typedef int8_t 	Int8_t;
+typedef int16_t Int16_t;
+typedef int32_t Int32_t;
+typedef int64_t Int64_t;
+
+typedef int8 	Int8;
+typedef int16 	Int16;
+typedef int32 	Int32;
+typedef int64 	Int64;
+
+typedef Int8	I8;
+typedef Int16	I16;
+typedef Int32	I32;
+typedef Int64	I64;
+
+
+typedef uint8_t		Uint8_t;
+typedef uint16_t	Uint16_t;
+typedef uint32_t	Uint32_t;
+typedef uint64_t	Uint64_t;
+
+typedef uint8		Uint8;
+typedef uint16		Uint16;
+typedef uint32		Uint32;
+typedef uint64		Uint64;
+
+typedef Uint8		U8;
+typedef Uint16		U16;
+typedef Uint32		U32;
+typedef Uint64		U64;
 
 static_assert(sizeof(uint8_t) 	== 1, "uint8_t must be 8 bits");
 static_assert(sizeof(uint16_t) 	== 2, "uint16_t must be 16 bits");
@@ -207,8 +243,22 @@ using U64			= xus::u64;
 
 using Usize_t		= xus::usize_t;
 using Ssize_t		= xus::ssize_t;
+using Isize_t		= Ssize_t;
 
 using Usize			= Usize_t;
 using Ssize			= Ssize_t;
+using Isize			= Isize_t;
+
+using Uintptr_t = xus::uintptr_t;
+using Intptr_t	= xus::intptr_t;
+
+using Iptr_t	= Intptr_t;
+using Uptr_t	= Uintptr_t;
+
+using Intptr	= Iptr_t;
+using Uintptr	= Uptr_t;
+
+using Iptr		= Iptr_t;
+using Uptr		= Uptr_t;
 
 #endif
