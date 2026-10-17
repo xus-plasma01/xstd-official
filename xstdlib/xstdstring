@@ -1,0 +1,6 @@
+#ifndef _xstdstring
+#define _xstdstring
+
+#include "include/xstdstring.hh"
+
+#endif

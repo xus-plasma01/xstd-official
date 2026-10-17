@@ -80,22 +80,28 @@ void xus::outf(const char *fmt, ...)
 
 					break;
 				}
-			case 'x':
+			case 'u':
 				{
-					unsigned val = va_arg(xargs, unsigned);
+					switch(fmt[1])
+					{
+					case 'x':
+						{
+							unsigned val = va_arg(xargs, unsigned);
 
-					unsigned prefix = val;
-					if (prefix)
-						{
-							xus::outc('0');
-							xus::outc('x');
-						}
+							unsigned prefix = val;
+							if (prefix)
+								{
+									xus::outc('0');
+									xus::outc('x');
+								}
 					
-					for (int i = 7; i >= 0; i--)
-						{
-							unsigned nib = (val >> (i*4)) & 0xf;
-							xus::outc("0123456789abcdef"[nib]);
+							for (int i = 7; i >= 0; i--)
+								{
+									unsigned nib = (val >> (i*4)) & 0xf;
+									xus::outc("0123456789abcdef"[nib]);
+								}
 						}
+					}
 
 					break;
 				}

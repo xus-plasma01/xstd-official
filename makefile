@@ -1,5 +1,5 @@
-CXX			:= tools/zig-0.16/zig c++
-AR			:= tools/zig-0.16/zig ar
+CXX			:= zig c++
+AR			:= zig ar
 
 CXXFLAGS 	:= -target x86_64-linux-none -ffreestanding -nostdlib -static -fno-exceptions -fno-rtti -fno-sanitize=undefined -fno-stack-protector -T linker.ld
 

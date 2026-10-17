@@ -1,6 +1,11 @@
 #ifndef _sys_nums_hh
 #define _sys_nums_hh
 
+#ifdef __x86_64__
+	inline constexpr long HLT	= 231;
+	inline constexpr long EXIT	= 60;
+#endif
+
 namespace xus
 {
 

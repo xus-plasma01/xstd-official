@@ -162,4 +162,53 @@ static_assert(sizeof(Usize_t) == sizeof(Ssize_t),
 
 }
 
+/// just incase i dont wna use the namespace
+using int8_t		= xus::int8_t;
+using int16_t		= xus::int16_t;
+using int32_t		= xus::int32_t;
+using int64_t		= xus::int64_t;
+
+using uint8_t		= xus::uint8_t;
+using uint16_t		= xus::uint16_t;
+using uint32_t		= xus::uint32_t;
+using uint64_t		= xus::uint64_t;
+
+
+using Int8_t		= int8_t;
+using Int16_t		= int16_t;
+using Int32_t		= int32_t;
+using Int64_t		= int64_t;
+
+using Uint8_t		= uint8_t;
+using Uint16_t		= uint16_t;
+using Uint32_t		= uint32_t;
+using Uint64_t		= uint64_t;
+
+
+using Int8			= Int8_t;
+using Int16			= Int16_t;
+using Int32			= Int32_t;
+using Int64			= Int64_t;
+	
+using Uint8			= Uint8_t;
+using Uint16		= Uint16_t;
+using Uint32		= Uint32_t;
+using Uint64		= Uint64_t;
+
+using I8			= xus::i8;
+using I16			= xus::i16;
+using I32			= xus::i32;
+using I64 			= xus::i64;
+
+using U8			= xus::u8;
+using U16			= xus::u16;
+using U32			= xus::u32;
+using U64			= xus::u64;
+
+using Usize_t		= xus::usize_t;
+using Ssize_t		= xus::ssize_t;
+
+using Usize			= Usize_t;
+using Ssize			= Ssize_t;
+
 #endif

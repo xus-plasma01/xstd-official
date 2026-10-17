@@ -1,10 +1,12 @@
 /// externals
 #include "xstdlib/external/asm.hh"
+#include "xstdlib/external/sysnums.hh"
 
 /// stdlib features
 #include "xstdlib/xstdio"
 #include "xstdlib/xstdsys"
 #include "xstdlib/xstdmem"
+#include "xstdlib/xstdstring"
 
 asmlinkage void _start(void) 
 {
@@ -38,8 +40,8 @@ asmlinkage void _start(void)
 	void *v1	= arena.assign();
 
 	xus::outw("\nxus::arena_t arena;\n");
-	xus::outw("allocated v0:	%x		using arena.assign()\n", v0);
-	xus::outw("allocated v1:	%x		using arena.assign()\n", v1);
+	xus::outw("allocated v0:	%ux		using arena.assign()\n", v0);
+	xus::outw("allocated v1:	%ux		using arena.assign()\n", v1);
 
 	arena.unassign(v0);
 	arena.unassign(v1);
@@ -69,6 +71,7 @@ asmlinkage void _start(void)
 		xus::outw("xus::afmm(size) fail\n\n");
 	else
 		xus::outw("xus::afmm(size) success\n\n");
+		
 
 	xus::outw("[END OF TEST 3]\n\n\n");
 
@@ -81,7 +84,25 @@ asmlinkage void _start(void)
 	if (!xus::vsyscall(6, 1, 0, 1, 'x', 1, 1))
 		xus::outw("xus::vsyscall fail\n");
 	else
-		xus::outw("xus::vsyscall success\n");
+	{
+		xus::outw("xus::vsyscall success\n\n\n");
+		xus::outw("%s", xus::vsyscall(6, 1, 0, 1, 'x', 1, 1));
+	}
 
-	xus::ret(231, 0);
+	xus::outw("Only use this if your lazy.\n");
+	xus::outw("Otherwise i'd recommend the fixed syscalls.\n");
+
+	xus::outw("[END OF TEST 4]\n\n\n");
+
+
+	xus::outw("[TEST 5] testing xus::string\n\n");
+
+	xus::string str = "Hello World!\n";
+	xus::outw(str.raw());
+	xus::outw("xus::string:		passed!");
+	xus::outw("\n\n");
+
+	xus::outw("[END OF TEST 5]\n\n\n");
+
+	xus::ret(HLT, 0);
 }
