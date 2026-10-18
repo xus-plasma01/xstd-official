@@ -33,6 +33,8 @@ public:
 };
 
 extern xstream& xout;
+extern xstream& out;
+extern char		endw;
 
 }
 

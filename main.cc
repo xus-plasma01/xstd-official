@@ -7,6 +7,7 @@
 #include "xstdlib/xstdsys"
 #include "xstdlib/xstdmem"
 #include "xstdlib/xstdstring"
+#include "xstdlib/xstdarray"
 
 asmlinkage void _start(void) 
 {
@@ -24,7 +25,7 @@ asmlinkage void _start(void)
 	xus::outw("[outputting a string] 		xus::outw(const char *, ...)  	");
 	xus::outw("Hello World!\n\n");
 
-	xus::xout << "xus::xout << PASSED" << '\n';
+	xus::xout << "xus::xout << PASSED" << xus::endw;
 
 	xus::outw("[END OF TEST 1]\n\n\n");
 
@@ -141,8 +142,24 @@ asmlinkage void _start(void)
 
 	xus::outw("[END OF TEST 5]\n\n\n");
 
-/// xus::strcmp, memcpy, etc testing
-	xus::outw("[TEST 6] testing the other xstdstring stuff\n\n");
+/// xstdarray
+	xus::outw("[TEST 6] testing xstdarray\n\n");
+
+	xus::array<int, 5> arr;
+	arr[0] = 1;
+	arr[1] = 2;
+	arr[2] = 3;
+	arr[3] = 4;
+	arr[4] = 5;
+
+	for (int i = 0; 
+			i <= static_cast<int>(arr.size()) - 1; ++i)
+		xus::outw("%d\n", arr[i]);
+
+
+	xus::outw("xus::array: passed\n");
+
+	xus::out << "[END OF TEST 6]\n\n" << xus::endw;
 
 	xus::ret(HLT, 0);
 }

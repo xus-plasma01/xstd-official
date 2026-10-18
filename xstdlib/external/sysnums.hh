@@ -4,6 +4,9 @@
 #ifdef __x86_64__
 	inline constexpr long HLT	= 231;
 	inline constexpr long EXIT	= 60;
+#elif defined(__i386__)
+	inline constexpr long HLT	= 252;
+	inline constexpr long EXIT	= 1;
 #endif
 
 namespace xus

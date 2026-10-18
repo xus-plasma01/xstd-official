@@ -7,7 +7,10 @@
 #include "../external/args.hh"
 
 static xus::xstream streamrock;
-xus::xstream& xus::xout = streamrock;
+
+xus::xstream& 	xus::xout 	= streamrock;
+xus::xstream& 	xus::out	= streamrock;
+char			xus::endw	= '\n';	
 
 void xus::outc(char c)
 {

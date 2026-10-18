@@ -1,0 +1,7 @@
+#ifndef _xstdarray
+#define _xstdarray
+
+#include "include/xstdarray.hh"
+#include "src/xstdarray.cc"
+
+#endif

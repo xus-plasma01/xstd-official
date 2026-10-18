@@ -1,7 +1,10 @@
 CXX			:= zig c++
 AR			:= zig ar
 
-CXXFLAGS 	:= -target x86_64-linux-none -ffreestanding -nostdlib -static -fno-exceptions -fno-rtti -fno-sanitize=undefined -fno-stack-protector -T linker.ld
+ARCH 	?= native
+TARGET 	:= $(ARCH)
+
+CXXFLAGS 	:= -target $(TARGET) -Wall -Wextra -ffreestanding -nostdlib -static -fno-exceptions -fno-rtti -fno-sanitize=undefined -fno-stack-protector -T linker.ld
 
 X86_64_ARCHSRC		:= $(wildcard xstdlib/external/arch/x86-64/*.cc)
 ARCHSRC				:= $(X86_64_ARCHSRC)
@@ -10,11 +13,11 @@ OTHER_SRC			:= $(wildcard xstdlib/src/*.cc)
 SRC					:= $(EXTERNAL_SRC) $(OTHER_SRC) $(ARCHSRC)
 OBJ					:= $(SRC:%.cc=build/%.o)
 
-TARGET				:= outfile
-OBJTARGET			:= outfile.o
+EXEC				?= outfile
+OBJTARGET			?= outfile.o
 
-$(TARGET): main.cc $(SRC)
-	$(CXX) $(CXXFLAGS) $(SRC) main.cc -o $(TARGET)
+$(EXEC): main.cc $(SRC)
+	$(CXX) $(CXXFLAGS) $(SRC) main.cc -o $(EXEC)
 
 static: build/xuslib.a
 
@@ -32,10 +35,10 @@ static:
 	$(CXX) $(CXXFLAGS) -static $(ARCHSRC) $(SRC) -o $(TARGET)
 
 run:
-	./$(TARGET)
+	./$(EXEC)
 
 clean:
-	rm -rf $(TARGET)
-	rm -rf $(TARGET).o
-	rm -rf $(TARGET).S
+	rm -rf $(EXEC)
+	rm -rf $(EXEC).o
+	rm -rf $(EXEC).S
 	rm -rf build

@@ -9,7 +9,7 @@
 #include "../external/sysnums.hh"
 
 asmlinkage long xus::vsyscall(
-	int _args, long number, ...)
+	int _args, long number, ...) noexcept
 {
 	va_list vargs;
 
@@ -49,8 +49,9 @@ asmlinkage long xus::vsyscall(
 	}
 }
 
-asmlinkage void
-xus::ret(long number, long code)
+asmlinkage _noreturn 
+void xus::ret(
+	long number, long code) noexcept
 {
 	xus::xsyscall1(number, code);
 	for (;;);
