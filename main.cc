@@ -78,59 +78,9 @@ asmlinkage void _start(void)
 
 	xus::outw("[END OF TEST 3]\n\n\n");
 
-	xus::outw("[TEST 4] syscalls\n\n");
-
-	xus::outw("[FILES]\n");
-	xus::outw("[INC] xstdlib/include/xstdsys.hh\n");
-	xus::outw("[SRC] xstdlib/src/xstdsys.cc\n\n");
-
-	if (!xus::xsyscall0(1))
-		xus::outw("xsyscall0 fail\n");
-	else
-		xus::outw("xsyscall0 pass\n");
-
-	if (!xus::xsyscall1(1, 1))
-		xus::outw("xsyscall1 fail\n");
-	else
-		xus::outw("xsyscall1 pass\n");
-
-	if (!xus::xsyscall2(1, 1, 1))
-		xus::outw("xsyscall2 fail\n");
-	else
-		xus::outw("xsyscall2 pass\n");
-
-	if (!xus::xsyscall3(1, 1, 1, 1))
-		xus::outw("xsyscall3 fail\n");
-	else
-		xus::outw("xsyscall3 pass\n");
-
-	if (!xus::xsyscall4(1, 1, 1, 1, 1))
-		xus::outw("xsyscall4 fail\n");
-	else
-		xus::outw("xsyscall4 pass\n");
-
-	if (!xus::xsyscall5(1, 1, 1, 1, 1, 1))
-		xus::outw("xsyscall5 fail\n");
-	else
-		xus::outw("xsyscall5 pass\n");
-
-	if (!xus::xsyscall6(1, 1, 1, 1, 1, 1, 0))
-		xus::outw("xsyscall6 fail\n");
-	else
-		xus::outw("xsyscall6 pass\n");
-
-	if (!xus::vsyscall(6, 1, 0, 1, 'x', 1, 1))
-		xus::outw("xus::vsyscall fail\n");
-	else
-		xus::outw("xus::vsyscall success\n\n\n");
-
-	xus::outw("Only use this if your lazy.\n");
-	xus::outw("Otherwise i'd recommend the fixed syscalls.\n");
-
-	xus::outw("[END OF TEST 4]\n\n\n");
 
 /// xus::string testing
-	xus::outw("[TEST 5] testing xus::string\n\n");
+	xus::outw("[TEST 4] testing xus::string\n\n");
 
 	xus::string str = "Hello World!\n";
 	xus::outw(str.raw());
@@ -140,18 +90,26 @@ asmlinkage void _start(void)
 	xus::xout << "xus::string (xout): 	passed!";
 	xus::outw("\n\n");
 
-	xus::outw("[END OF TEST 5]\n\n\n");
+	xus::outw("[END OF TEST 4]\n\n\n");
 
 /// xstdarray
+<<<<<<< HEAD
 	xus::outw("[TEST 6] testing xstdarray\n\n");
 
 	xus::array<int, 5> arr;
+=======
+	xus::outw("[TEST 5] testing xstdarray\n\n");
+
+	xus::array<int, 5> arr;
+	
+>>>>>>> cfb77316 ([commit 14] added an array feature (xstdarray))
 	arr[0] = 1;
 	arr[1] = 2;
 	arr[2] = 3;
 	arr[3] = 4;
 	arr[4] = 5;
 
+<<<<<<< HEAD
 	for (int i = 0; 
 			i <= static_cast<int>(arr.size()) - 1; ++i)
 		xus::outw("%d\n", arr[i]);
@@ -160,6 +118,16 @@ asmlinkage void _start(void)
 	xus::outw("xus::array: passed\n");
 
 	xus::out << "[END OF TEST 6]\n\n" << xus::endw;
+=======
+	int count = static_cast<int>(arr.size());
+
+	for (int i = 0; i <= count - 1; ++i)
+		xus::outw("arr[%d]: %d\n", i, arr[i]);
+
+	xus::outw("\nxus::array: passed\n");
+
+	xus::out << "[END OF TEST 5]\n\n" << xus::endw;
+>>>>>>> cfb77316 ([commit 14] added an array feature (xstdarray))
 
 	xus::ret(HLT, 0);
 }

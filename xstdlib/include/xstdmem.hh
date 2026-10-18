@@ -4,10 +4,7 @@
 #include "xstdint.hh"
 
 inline constexpr Usize_t arena_size{ 1024 };
-
-#ifdef __x86_64__
-	inline constexpr Usize_t max_allowed_size{ 64UL * 1024UL * 1024UL };
-#endif
+inline constexpr Usize_t max_allowed_size{ 64 * 1024 * 1024 };
 
 namespace xus
 {

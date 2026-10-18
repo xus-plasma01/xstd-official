@@ -15,8 +15,8 @@ char			xus::endw	= '\n';
 void xus::outc(char c)
 {
 	xus::vsyscall(
-		4, 
-		xus::xstdout, 
+		4,
+		WRITE, 
 		1, 
 		reinterpret_cast<long>(&c), 
 		1);
@@ -26,7 +26,7 @@ int xus::getc(void)
 {
 	return xus::vsyscall(
 		4,
-		xus::xstdin,
+		READ,
 		0,
 		0,
 		0);

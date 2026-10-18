@@ -1,13 +1,30 @@
 CXX			:= zig c++
 AR			:= zig ar
 
+<<<<<<< HEAD
 ARCH 	?= native
 TARGET 	:= $(ARCH)
+=======
+ARCH 		?= native
+TARGET 		?= native
+>>>>>>> cfb77316 ([commit 14] added an array feature (xstdarray))
 
 CXXFLAGS 	:= -target $(TARGET) -Wall -Wextra -ffreestanding -nostdlib -static -fno-exceptions -fno-rtti -fno-sanitize=undefined -fno-stack-protector -T linker.ld
 
 X86_64_ARCHSRC		:= $(wildcard xstdlib/external/arch/x86-64/*.cc)
-ARCHSRC				:= $(X86_64_ARCHSRC)
+I386_ARCHSRC		:= $(wildcard xstdlib/external/arch/i386/*.cc)
+
+ifeq ($(ARCH),x86-64)
+	ARCHSRC	:= $(X86_64_ARCHSRC)
+	ARCHFLG := -m64
+else ifeq ($(ARCH),i386)
+	ARCHSRC := $(I386_ARCHSRC)
+	ARCHFLG := -m32
+else
+	ARCHSRC := $(X86_64_ARCHSRC)
+	ARCHFLG := -m64
+endif
+
 EXTERNAL_SRC		:= $(wildcard xstdlib/external/*.cc)
 OTHER_SRC			:= $(wildcard xstdlib/src/*.cc)
 SRC					:= $(EXTERNAL_SRC) $(OTHER_SRC) $(ARCHSRC)
@@ -17,7 +34,11 @@ EXEC				?= outfile
 OBJTARGET			?= outfile.o
 
 $(EXEC): main.cc $(SRC)
+<<<<<<< HEAD
 	$(CXX) $(CXXFLAGS) $(SRC) main.cc -o $(EXEC)
+=======
+	$(CXX) $(CXXFLAGS) $(ARCHFLG)  $(SRC) main.cc -o $(EXEC)
+>>>>>>> cfb77316 ([commit 14] added an array feature (xstdarray))
 
 static: build/xuslib.a
 

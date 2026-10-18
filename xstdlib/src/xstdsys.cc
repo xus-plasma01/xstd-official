@@ -43,7 +43,7 @@ asmlinkage long xus::vsyscall(
 			{
 				xus::outw("varidic syscalls (and syscalls in general) can take only up to 6 args!\n");
 
-				xus::ret(xus::hlt, 0);
+				xus::ret(HLT, 0);
 				return static_cast<long>(-1);
 			}
 	}
