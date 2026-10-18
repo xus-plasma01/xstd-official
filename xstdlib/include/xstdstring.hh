@@ -28,14 +28,14 @@ private:
 	Usize_t 	_length;
 
 public:
-	string(const char *data)
+	constexpr string(const char *data)
 	: _raw_str{data}
 	, _length{strlen(data)}
 	{}
 	
-	const char *raw() 	const noexcept 	{ return _raw_str;		}
-	Usize_t size()		const noexcept	{ return _length; 		}
-	Usize_t empty()		const noexcept 	{ return _length == 0;	}
+	inline const char *raw() 	const noexcept 	{ return _raw_str;		}
+	inline Usize_t size()		const noexcept	{ return _length;		}
+	inline Usize_t empty()		const noexcept 	{ return _length == 0;	}
 };
 	
 }

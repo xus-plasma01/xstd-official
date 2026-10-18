@@ -27,9 +27,14 @@ private:
 	uint8		arena[arena_size];
 
 public:
-	void 			init();
-	void *			assign();
-	void 			unassign(void *ptr);
+	void 			init() noexcept;
+	void *			assign() noexcept;
+	void 			unassign(void *ptr) noexcept;
+
+	_arena_t()
+	{
+		init();
+	}
 }
 arena_t;
 
@@ -37,8 +42,8 @@ typedef _arena_t 	_arena;
 typedef	 arena_t 	 arena;
 
 
-Usize_t afm(xus::Usize_t size);
-Usize_t afmm(xus::Usize_t size);
+Usize_t afm(xus::Usize_t size) noexcept;
+Usize_t afmm(xus::Usize_t size) noexcept;
 	
 }
 

@@ -1,0 +1,6 @@
+#ifndef _xstdattr
+#define _xstdattr
+
+#include "include/xstdattr.hh"
+
+#endif

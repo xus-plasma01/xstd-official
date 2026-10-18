@@ -4,7 +4,7 @@
 #include "../include/xstdio.hh"
 
 
-void xus::_arena_t::init()
+void xus::_arena_t::init() noexcept
 {
 	list				= reinterpret_cast<_segment_t *>(arena);
 	_segment_t *crnt{ list };
@@ -23,7 +23,7 @@ void xus::_arena_t::init()
 }
 
 Usize_t xus::afm(
-	usize_t size)
+	usize_t size) noexcept
 {
 	size = arena_size + size;
 	if (size > max_allowed_size)
@@ -36,12 +36,12 @@ Usize_t xus::afm(
 }
 
 Usize_t xus::afmm(
-	usize_t size)
+	usize_t size) noexcept
 {
 	return xus::afm(size);
 }
 
-void *xus::_arena_t::assign()
+void *xus::_arena_t::assign() noexcept
 {
 	if (list == nullptr)
 		{
@@ -55,7 +55,7 @@ void *xus::_arena_t::assign()
 	return reinterpret_cast<void *>(seg);
 }
 
-void xus::_arena_t::unassign(void *ptr)
+void xus::_arena_t::unassign(void *ptr) noexcept
 {
 	_segment *seg	= reinterpret_cast<_segment_t *>(ptr);
 	seg->next		= list;

@@ -12,7 +12,7 @@ xus::xstream& 	xus::xout 	= streamrock;
 xus::xstream& 	xus::out	= streamrock;
 char			xus::endw	= '\n';	
 
-void xus::outc(char c)
+void xus::outc(char c) noexcept
 {
 	xus::vsyscall(
 		4,
@@ -22,7 +22,7 @@ void xus::outc(char c)
 		1);
 }
 
-int xus::getc(void)
+int xus::getc(void) noexcept
 {
 	return xus::vsyscall(
 		4,
@@ -32,7 +32,7 @@ int xus::getc(void)
 		0);
 }
 
-void xus::outw(const char *fmt, ...)
+void xus::outw(const char *fmt, ...) noexcept 
 {
 	va_list xargs;
 	va_start(xargs, fmt);

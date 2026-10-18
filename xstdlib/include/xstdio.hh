@@ -6,26 +6,26 @@
 namespace xus
 {
 
-void 	outc(char c);
-int 	getc(void);
-void	outw(const char *fmt, ...);
+void 	outc(char c) 					noexcept;
+int 	getc(void)						noexcept;
+void	outw(const char *fmt, ...)		noexcept;
 
 class xstream
 {
 public:	
-	xus::xstream& operator<<(const xus::string& str)
+	xus::xstream& operator<<(const xus::string& str) noexcept
 	{
 		outw(str.raw());
 		return *this;
 	}
 
-	xus::xstream& operator<<(const char *str)
+	xus::xstream& operator<<(const char *str) noexcept
 	{
 		outw(str);
 		return *this;
 	}
 
-	xus::xstream& operator<<(char c)
+	xus::xstream& operator<<(char c) noexcept
 	{
 		outc(c);
 		return *this;
