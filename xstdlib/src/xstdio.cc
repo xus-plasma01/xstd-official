@@ -16,7 +16,7 @@ void xus::outc(char c) noexcept
 {
 	xus::vsyscall(
 		4,
-		WRITE, 
+		WWRITE, 
 		1, 
 		reinterpret_cast<long>(&c), 
 		1);
@@ -26,16 +26,65 @@ int xus::getc(void) noexcept
 {
 	return xus::vsyscall(
 		4,
-		READ,
+		WREAD,
 		0,
 		0,
 		0);
 }
 
-void xus::outw(const char *fmt, ...) noexcept 
+static void outhex(unsigned value) noexcept
 {
-	va_list xargs;
-	va_start(xargs, fmt);
+	unsigned pre = value;
+	if (pre)
+	{
+		xus::outc('0');
+		xus::outc('x');
+	}
+
+	for (int i = 7; i >= 0; i--)
+	{
+		unsigned nib = (value >> (i*4)) & 0xf;
+		xus::outc("0123456789abcdef"[nib]);
+	}
+}
+
+static void outstr(const char *s) noexcept
+{ 
+	while (*s)
+	{
+		xus::outc(*s);
+		s++;
+	}
+}
+
+
+static void outint(int value) noexcept
+{
+	unsigned mag = value;
+	if (value < 0)
+	{
+		xus::outc('-');
+		mag = -value;
+	}
+
+	unsigned div = 1;
+	while (mag / div > 9)
+		div *= 10;
+
+	while (div > 0)
+	{
+		xus::outc('0' + mag / div);
+		mag %= div;
+		div /= 10;
+	}
+}
+
+
+void xus::outw(
+	const char *fmt, ...) noexcept
+{
+	va_list vargs;
+	va_start(vargs, fmt);
 
 	while (*fmt)
 	{
@@ -52,64 +101,27 @@ void xus::outw(const char *fmt, ...) noexcept
 				break;
 			case 's':
 				{
-					const char *s = va_arg(xargs, const char *);
-					while (*s)
-					{
-						xus::outc(*s);
-						++s;
-					}
-
+					const char *s = va_arg(vargs, const char *);
+					outstr(s);
 					break;
 				}
 			case 'd':
 				{
-					int value = va_arg(xargs, int);
-					unsigned mag = value;
-					if (value < 0)
-					{
-						xus::outc('-');
-						mag = -value;
-					}
-
-					unsigned divisor = 1;
-					while (mag / divisor > 9)
-					{
-						divisor *= 10;
-					}
-
-					while (divisor > 0)
-					{
-						xus::outc('0' + mag / divisor);
-						mag %= divisor;
-						divisor /= 10;
-					}
-
+					int value = va_arg(vargs, int);
+					outint(value);
 					break;
 				}
-				case 'x':
-					{
-						unsigned val = va_arg(xargs, unsigned);
-
-						unsigned prefix = val;
-						if (prefix)
-							{
-								xus::outc('0');
-								xus::outc('x');
-							}
-					
-						for (int i = 7; i >= 0; i--)
-							{
-								unsigned nib = (val >> (i*4)) & 0xf;
-								xus::outc("0123456789abcdef"[nib]);
-							}
-						break;
-					}
+			case 'x':
+				{
+					unsigned value = va_arg(vargs, unsigned);
+					outhex(value);
+					break;
+				}
 			}
 			++fmt;
 		}
 		else
 			xus::outc(*fmt++);
 	}
-	end:	va_end(xargs);
+	end: va_end(vargs);
 }
-

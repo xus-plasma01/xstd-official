@@ -3,7 +3,7 @@
 asmlinkage
 {
 
-long xus::i386_syscall0(long number) noexcept
+long xus::arch::I386::i386_syscall0(long number) noexcept
 {
 	long ret;
 	_asm unoptimize(
@@ -16,7 +16,8 @@ long xus::i386_syscall0(long number) noexcept
 	return ret;
 }
 
-long xus::i386_syscall1(long number, long arg1) noexcept
+long xus::arch::I386::i386_syscall1(
+	long number, long arg1) noexcept
 {
 	long ret;
 	_asm unoptimize(
@@ -30,7 +31,7 @@ long xus::i386_syscall1(long number, long arg1) noexcept
 	return ret;
 }
 
-long xus::i386_syscall2(
+long xus::arch::I386::i386_syscall2(
 	long number, long arg1, long arg2) noexcept
 {
 	long ret;
@@ -46,7 +47,7 @@ long xus::i386_syscall2(
 	return ret;
 }
 
-long xus::i386_syscall3(
+long xus::arch::I386::i386_syscall3(
 	long number, long arg1, long arg2, long arg3) noexcept
 {
 	long ret;
@@ -63,7 +64,7 @@ long xus::i386_syscall3(
 	return ret;
 }
 
-long xus::i386_syscall4(
+long xus::arch::I386::i386_syscall4(
 	long number,
 	long arg1,
 	long arg2,
@@ -86,7 +87,7 @@ long xus::i386_syscall4(
 	return ret;
 }
 
-long xus::i386_syscall5(
+long xus::arch::I386::i386_syscall5(
 	long number,
 	long arg1,
 	long arg2,
@@ -111,7 +112,7 @@ long xus::i386_syscall5(
 	return ret;
 }
 
-long xus::i386_syscall6(
+long xus::arch::I386::i386_syscall6(
 	long number,
 	long arg1,
 	long arg2,
@@ -140,5 +141,7 @@ long xus::i386_syscall6(
 
 	return ret;
 }
-	
+
 }
+	
+

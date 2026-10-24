@@ -2,25 +2,14 @@
 #define _xstdattr_hh
 
 #if defined(__GNUC__) || defined(__clang__)
-#       define _forceptr        __attribute__((force_align_arg_pointer))
-#       define _noreturn        __attribute__((noreturn))
-#       define _nodiscard       __attribute__((warn_unused_result))
-#       define _section(...)    __attribute__((section(__VA_ARGS__)))
+#	define __noreturn 		__attribute__((noreturn))
+#	define __nodiscard		__attribute__((warn_unused_result))
 #else
-#       define _noreturn                [[noreturn]]
-#       define _nodiscard               [[nodiscard]]
-#       define _fallthrough             [[fallthrough]]
-#       define _maybe_unused            [[maybe_unused]]
-#       define _deprecated(msg)         [[deprecated(msg)]]
-#       define _no_unique_address       [[no_unique_address]]
+#	define __noreturn 				[[noreturn]]
+#	define __nodiscard 				[[nodiscard]]
 #endif
 
-#if __has_cpp_attribute(likely) >= 201803L
-#       define _likely 		[[likely]]
-#       define _unlikely    [[unlikely]]
-#else
-#       define _likely
-#       define _unlikely
-#endif
+#define _nodiscard		__nodiscard
+#define _noreturn		__noreturn
 
 #endif

@@ -2,7 +2,7 @@
 
 #include "syscalls.hh"
 
-namespace xus
+namespace xus::arch::x86_64
 {
 
 asmlinkage 
@@ -15,9 +15,7 @@ long x86_64_syscall0(long number) noexcept
 		"syscall"
 		: "=a"		(ret)
 		: "a"		(number)
-		: "rcx"
-		, "r11"
-		, "memory"
+		: "memory"
 	);
 
 	return ret;
@@ -32,9 +30,7 @@ long x86_64_syscall1(long number, long res1) noexcept
 		: "=a"		(ret)
 		: "a"		(number)
 		, "D"		(res1)
-		: "rcx"
-		, "r11"
-		, "memory"
+		: "memory"
 	);
 
 	return ret;
@@ -89,8 +85,8 @@ long x86_64_syscall4(
 {
 	long ret;
 
-	register long r10 _asm("r10")	= res4;
-	
+	register long r10 _asm("r10") = res4;
+
 	_asm unoptimize(
 		"syscall"
 		: "=a"			(ret)
@@ -99,9 +95,7 @@ long x86_64_syscall4(
 		, "S"			(res2)
 		, "d"			(res3)
 		, "r"			(r10)
-		: "rcx"
-		, "r11"
-		, "memory"
+		: "memory"
 	);
 
 	return ret;
@@ -117,9 +111,9 @@ long x86_64_syscall5(
 {
 	long ret;
 
-	register long r10 	_asm("r10")		= res4;
-	register long r8 	_asm("r8")		= res5;
-	
+	register long r10 	_asm("r10") = res4;
+	register long r8	_asm("r8")	= res5;
+
 	_asm unoptimize(
 		"syscall"
 		: "=a"			(ret)
@@ -129,9 +123,7 @@ long x86_64_syscall5(
 		, "d"			(res3)
 		, "r"			(r10)
 		, "r"			(r8)
-		: "rcx"
-		, "r11"
-		, "memory"
+		: "memory"
 	);
 
 	return ret;
@@ -148,23 +140,21 @@ long x86_64_syscall6(
 {
 	long ret;
 
-	register long r10 	_asm("r10")		= res4;
-	register long r8 	_asm("r8")		= res5;
-	register long r9 	_asm("r9")		= res6;
+	register long r10 	_asm("r10") = res4;
+	register long r8	_asm("r8")	= res5;
+	register long r9	_asm("r9")	= res6; 
 
 	_asm unoptimize(
 		"syscall"
-		: "=a"		(ret)
-		: "a"		(number)
-		, "D"		(res1)
-		, "S"		(res2)
-		, "d"		(res3)
-		, "r"		(r10)
-		, "r"		(r8)
-		, "r"		(r9)
-		: "rcx"
-		, "r11"
-		, "memory"
+		: "=a"			(ret)
+		: "D"			(number)
+		, "S"			(res1)
+		, "d"			(res2)
+		, "r"			(res3)
+		, "r"			(r10)
+		, "r"			(r8)
+		, "r"			(r9)
+		: "memory"
 	);
 
 	return ret;

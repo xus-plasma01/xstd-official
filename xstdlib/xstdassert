@@ -1,0 +1,6 @@
+#ifndef _xstdassert
+#define _xstdassert
+
+#include "include/xstdassert.hh"
+
+#endif

@@ -1,6 +1,7 @@
 /// include
 #include "../include/xstdsys.hh"
 #include "../include/xstdio.hh"
+#include "../include/xstdassert.hh"
 
 /// external
 #include "../external/asm.hh"
@@ -38,21 +39,52 @@ asmlinkage long xus::vsyscall(
 	case 4:		return xus::xsyscall4(number, arg1, arg2, arg3, arg4);
 	case 5:		return xus::xsyscall5(number, arg1, arg2, arg3, arg4, arg5);
 	case 6:		return xus::xsyscall6(number, arg1, arg2, arg3, arg4, arg5, arg6);
-	default:	
-		if (_args >= 6)
-			{
-				xus::outw("varidic syscalls (and syscalls in general) can take only up to 6 args!\n");
-
-				xus::ret(HLT, 0);
-				return static_cast<long>(-1);
-			}
+	default:
+		assertion(false, "syscall args only allowed up to 6", TRAP);
 	}
+}
+
+maybe_unused static void _x86_64_exit()
+{
+	_asm unoptimize(
+		"mov $60,	%%rax\n"
+		"xor %%rdi,	%%rdi\n"
+		"syscall"
+		::
+		: "rax"
+		, "rdi"
+	);
+}
+
+maybe_unused static void _i386_exit()
+{
+	_asm unoptimize(
+		"mov $1,	%%eax\n"
+		"xor %%ebx,	%%ebx\n"
+		"int $0x80"
+		::
+		: "eax"
+		, "ebx"
+	);
 }
 
 asmlinkage _noreturn 
 void xus::ret(
-	long number, long code) noexcept
+	long number) noexcept
 {
-	xus::xsyscall1(number, code);
-	for (;;);
+	switch(static_cast<_exit_t>(number))
+	{
+	case UNREACHABLE:			xus::unreachable();
+	case TRAP:					xus::trap();
+	case LOOP:					for (;;);
+	case EXIT:
+#ifdef __x86_64__
+	_x86_64_exit();
+#elif defined(__i386__)
+	_i386_exit();
+#endif
+		xus::unreachable();
+	default:					xus::xsyscall0(static_cast<long>(number));
+	}
 }
+

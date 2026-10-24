@@ -1,0 +1,6 @@
+#ifndef _xstdmath
+#define _xstdmath
+
+#include "include/xstdmath.hh"
+
+#endif

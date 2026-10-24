@@ -2,12 +2,7 @@
 #define _xstdarray_hh
 
 #include "xstdint.hh"
-
-#if defined(__GNUC__) || defined(__clang__)
-#	define _nodiscard __attribute__((warn_unused_result))
-#else
-#	define _nodiscard [[nodiscard]]
-#endif
+#include "xstdattr.hh"
 
 using _Usize_t = Usize_t;
 

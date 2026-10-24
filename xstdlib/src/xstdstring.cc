@@ -1,12 +1,6 @@
 #include "../include/xstdstring.hh"
 #include "../include/xstdint.hh"
 
-#ifdef __i386__
-	typedef unsigned long long int __attribute__((__may_alias__)) 	op_t;
-#else
-	typedef unsigned long int __attribute__((__may_alias__)) 		op_t;
-#endif
-
 asmlinkage
 {
 

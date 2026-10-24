@@ -3,7 +3,7 @@
 
 #include "../../asm.hh"
 
-namespace xus
+namespace xus::arch::I386
 {
 
 asmlinkage
